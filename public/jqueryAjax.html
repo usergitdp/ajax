@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="input"><span id="span"></span><br>
+    <button id="btn1">按钮</button>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script>
+        let btn1 = document.getElementById("btn1")
+        let input = document.getElementById("input")
+        let span = document.getElementById("span")
+        $("#btn1").on("click", function () {
+            $.ajax({
+                url: "http://127.0.0.1:5000/test2",
+                type: "post",
+                data: {
+                    name: 'zs',
+                    age: 18,
+                },
+                dataType: "json",
+                // timeout: 3000,
+                beforeSend: function () {
+                    console.log("请求发送之前调用, 如果显式的return false,就不发送请求了")
+                    // return false
+                },
+                success: function (data) {
+                    console.log('success', data)
+                },
+                error: function (xhr) {
+                    console.log('error', xhr)
+                },
+                complete: function () {
+                    console.log('complete')
+                }
+
+            })
+        })
+
+    </script>
+</body>
+
+</html>

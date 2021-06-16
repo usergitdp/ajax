@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="input"><span id="span"></span><br>
+    <button id="btn1">按钮</button>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="./myajaz.js"></script>
+    <script>
+        let btn1 = document.getElementById("btn1")
+        let input = document.getElementById("input")
+        let span = document.getElementById("span")
+        $("#btn1").on("click", function () {
+            myAjax({
+                url:"http://127.0.0.1:5000/test3",
+                type:"post",
+                data:{
+                    name:"zsli",
+                    age:12
+                },
+                success:function(data){
+                    console.log(data)
+                }
+            })
+        })
+
+    </script>
+</body>
+
+</html>

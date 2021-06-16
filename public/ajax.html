@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <div id="box"></div>
+    <input type="text" id="input"><span id="span"></span><br>
+    <button id="btn1">按钮</button>
+    <script>
+        let btn =document.getElementById("btn")
+        let box =document.getElementById("box")
+        btn.onclick=function(){
+            const xhr =new XMLHttpRequest()
+            console.log(xhr.readyState)
+            xhr.open("post","http://127.0.0.1:5000/test")
+            console.log(xhr.readyState)
+            xhr.setRequestHeader("content-type","application/x-www-form-urlencoded")
+            xhr.send("username=zs&age=18")
+            xhr.onreadystatechange=function(){
+                console.log(xhr.readyState)
+                if(xhr.readyState===4){
+                    if(xhr.status===200){
+                        console.log(xhr.responseText)
+                        box.textContent =xhr.responseText
+                    }
+                }
+            }
+            console.log("ok")
+            console.log("no")
+        }
+
+        let btn1 =document.getElementById("btn1")
+        let input =document.getElementById("input")
+        let span =document.getElementById("span")
+        btn1.onclick =function(){
+            let value =input.value.trim()
+            if(!value) return
+            const xhr =new XMLHttpRequest()
+            xhr.open("post","http://127.0.0.1:5000/test1")
+            xhr.setRequestHeader("content-type","application/x-www-form-urlencoded")
+            xhr.send("username="+value)
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState===4){
+                    if(xhr.status===200){
+                        let jsonObj = JSON.parse(xhr.responseText)
+                        if(jsonObj.result==="ok"){
+                            span.textContent=jsonObj.massage
+                            span.style.color="red"
+                        }else{
+                            span.textContent=jsonObj.massage
+                            span.style.color="green"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
